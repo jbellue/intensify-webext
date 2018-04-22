@@ -1,0 +1,26 @@
+body {
+	font-size: 1.385em;
+	font-weight: lighter;
+}
+
+h4 {
+    margin: 1em auto 0.3em auto;
+}
+h2 {
+    margin: 1em auto 0.3em auto;
+}
+
+input[type="range"] {
+	margin-top: 2px;
+}
+
+#max_image_size {
+	margin-left: 40px;
+	margin-top: 3px;
+}
+
+#save-button {
+	height: 30px;
+	margin-top: 40px;
+	font-size: 1em;
+}

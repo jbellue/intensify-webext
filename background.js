@@ -21,8 +21,9 @@ var defaultSettings = {
     magnitude: 7,
     fontSize: 30,
     text: "[INTENSIFY]",
-    maxImageSize: 800,
-    textOptions: 0
+    textOptions: "radioNone",
+    resizeImage: true,
+    maxImageSize: 800
 };
 
 function checkStoredSettings(storedSettings) {

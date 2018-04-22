@@ -1,19 +1,37 @@
 function updateUI(restoredSettings) {
-    function link_range_to_value(range, display) {
+    const linkRangeToValue = (range, display) => {
         display.innerHTML = range.value;
         range.addEventListener('input', () => display.innerHTML = range.value);
     }
+    const linkCheckboxToInput = (checkbox, input) => {
+        input.disabled = !checkbox.checked;
+        checkbox.addEventListener('change', () => input.disabled = !checkbox.checked);
+    }
+    const restoreRadioButton = () => {
+        let radioButtons = document.getElementsByName("textRadio");
+        for (let i = 0; i < radioButtons.length; i++) {
+            if (radioButtons[i].id === restoredSettings.textOptions) {
+                radioButtons[i].checked = true;
+                return;
+            }
+        }
+        // not found, default to 0 (None)
+        radioButtons[0].checked = true;
+    }
     const font_size_range = document.getElementById("font_range");
     const magnitude_range = document.getElementById("magnitude_range");
-    
+    const scale_checkbox  = document.getElementById("scaleCheckbox");
+    const maxImageSizeInput = document.getElementById("max_image_size");
+
     magnitude_range.value = restoredSettings.magnitude;
     font_size_range.value = restoredSettings.fontSize;
+    scale_checkbox.checked = restoredSettings.resizeImage;
+    maxImageSizeInput.value = restoredSettings.maxImageSize;
     document.getElementById("text").value = restoredSettings.text;
-    document.getElementById("max_image_size").value = restoredSettings.maxImageSize;
-    document.getElementById("text-menu").selectedIndex = restoredSettings.textOptions;
-
-    link_range_to_value(font_size_range, document.getElementById("font_slider_value"));
-    link_range_to_value(magnitude_range, document.getElementById("magnitude_slider_value"));
+    restoreRadioButton();
+    linkCheckboxToInput(scale_checkbox, maxImageSizeInput);
+    linkRangeToValue(font_size_range, document.getElementById("font_slider_value"));
+    linkRangeToValue(magnitude_range, document.getElementById("magnitude_slider_value"));
 }
 
 function onError(e) {
@@ -25,23 +43,24 @@ function storeSettings() {
     const getFontSize = () =>     document.getElementById("font_range").value;
     const getText = () =>         document.getElementById("text").value;
     const getMaxImageSize = () => document.getElementById("max_image_size").value;
-    const getTextOptions = () =>  document.getElementById("text-menu").selectedIndex;
+    const getTextOptions = () =>  document.querySelector('input[name="textRadio"]:checked').id;
+    const getResizeImage = () =>  document.getElementById("scaleCheckbox").checked;
     const magnitude    = getMagnitude();
     const fontSize     = getFontSize();
     const text         = getText();
     const maxImageSize = getMaxImageSize();
     const textOptions  = getTextOptions();
+    const resizeImage  = getResizeImage();
     browser.storage.local.set({
         magnitude,
         fontSize,
         text,
-        maxImageSize,
-        textOptions
+        textOptions,
+        resizeImage,
+        maxImageSize
     });
 }
 
-const saveButton = document.getElementById("save-button");
-saveButton.addEventListener("click", storeSettings);
-
+document.getElementById("save-button").addEventListener("click", storeSettings);
 const gettingStoredSettings = browser.storage.local.get();
 gettingStoredSettings.then(updateUI, onError);

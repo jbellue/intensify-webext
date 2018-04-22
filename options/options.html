@@ -2,23 +2,47 @@
 <html>
 <head>
     <meta charset="utf-8">
+	<link rel="stylesheet" href="./options.css">
 </head>
 <body>
-    <form>
-        <label>scale down<input type="number" id="max_image_size" placeholder="don't resize" min="60" value="800"></label></br>
-        <label>text<input type="text" id="text" value="[INTENSITY INTENSIFIES]"></label></br>
-        <label>font size (<span id="font_slider_value"></span>px)<input type="range" min="0" max="70" id="font_range"></label></br>
-        <label>intensify text</label>
-        <select id="text-menu">
-            <option value="none" title="the text won't move">none</option>
-            <option value="along" title="the text will shake along with the image">with the image</option>
-            <option value="shake" title="the text will shake independently from the image">shake</option>
-            <option value="pulse" title="the text will only pulse on the image">pulse</option>
-            <option value="pulse_move" title="the text will pulse and move with the image">pulse and move</option>
-        </select></br>
-        <label>INTENSITY (<span id="magnitude_slider_value"></span>)<input type="range" min="1" max="20" class="input-full" id="magnitude_range"></label></br>
-        <input type="button" value="Save preferences" id="save-button"/>
-    </form>
+    <h2>Default values</h2>
+    <div>
+        <h4>Intensity</h4>
+        <label for="magnitude_range">Shaking intensity (1: subtle, 20: probably too much)</label><br>
+        <input type="range" min="1" max="20" id="magnitude_range"><span id="magnitude_slider_value"></span>
+    </div>
+    <div>
+        <h4>Text to display on the image</h4>
+        <input type="text" id="text" placeholder="No text" value="[INTENSITY INTENSIFIES]">
+    </div>
+    <div>
+        <h4>Font size</h4>
+        <label for="font_range">Size of the text (in pixels)</label><br>
+        <input type="range" min="0" max="70" id="font_range"><span id="font_slider_value"></span>
+    </div>
+    <div>
+        <h4>Text effect</h4>
+        <div id="textRadio">
+            <input type="radio" id="radioNone" name="textRadio" checked>
+            <label for="radioNone">Don't move the text</label><br>
+            <input type="radio" id="radioAlong" name="textRadio">
+            <label for="radioAlong">Shake the text along with the image</label><br>
+            <input type="radio" id="radioShake" name="textRadio">
+            <label for="radioShake">Shake the text independently from the image</label><br>
+            <input type="radio" id="radioPulse" name="textRadio">
+            <label for="radioPulse">Pulse the text on the image</label><br>
+            <input type="radio" id="radioMove" name="textRadio">
+            <label for="radioMove">Pulse and move the text with the image</label><br>
+        </div>
+    </div>
+    <div>
+        <h4>Scale image down</h4>
+        <input type="checkbox" id="scaleCheckbox"><label for="scaleCheckbox">Scale the image down (good for larger images)</label><br>
+        <input type="number" id="max_image_size" min="60" value="800">
+    </div>
+    <div>
+        <button id="save-button" class="browser-style">Save preferences</button>
+    </div>
     <script src="./options.js"></script>
 </body>
 </html>

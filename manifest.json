@@ -3,16 +3,14 @@
     "manifest_version": 2,
     "name": "intensify",
     "version": "0.1",
-    "homepage_url": "https://github.com/jbellue/webExt-intensify",
+    "homepage_url": "https://github.com/jbellue/intensify-webext",
     "icons": {
         "48": "icons/page-48.png"
     },
-    
     "background": {
         "scripts": ["background.js"]
     },
     "permissions": ["tabs", "storage"],
-    
     "options_ui": {
         "page": "options/options.html",
         "browser_style": true
