@@ -4,6 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
     <title>INTENSIFY!</title>
+    <link rel="stylesheet" href="./intensify.css">
     <script type="text/javascript" src="./intensify.js"></script>
     <script type="text/javascript" src="./jsgif/b64.js"></script>
     <script type="text/javascript" src="./jsgif/GIFEncoder.js"></script>
@@ -13,42 +14,44 @@
 
 <body>
     <h1>INTENSIFY!</h1>
-    <div>
-        <h4>Intensity</h4>
-        <label for="magnitude_range">Shaking intensity (1: subtle, 20: probably too much)</label><br>
-        <input type="range" min="1" max="20" id="magnitude_range"><span id="magnitude_slider_value"></span>
-    </div>
-    <div>
-        <h4>Text to display on the image</h4>
-        <input type="text" id="text" placeholder="No text" value="[INTENSITY INTENSIFIES]">
-    </div>
-    <div>
-        <h4>Font size</h4>
-        <label for="font_range">Size of the text (in pixels)</label><br>
-        <input type="range" min="0" max="70" id="font_range"><span id="font_slider_value"></span>
-    </div>
-    <div>
-        <h4>Text effect</h4>
-        <div id="textRadio">
-            <input type="radio" id="radioNone" name="textRadio" checked>
-            <label for="radioNone">Don't move the text</label><br>
-            <input type="radio" id="radioAlong" name="textRadio">
-            <label for="radioAlong">Shake the text along with the image</label><br>
-            <input type="radio" id="radioShake" name="textRadio">
-            <label for="radioShake">Shake the text independently from the image</label><br>
-            <input type="radio" id="radioPulse" name="textRadio">
-            <label for="radioPulse">Pulse the text on the image</label><br>
-            <input type="radio" id="radioMove" name="textRadio">
-            <label for="radioMove">Pulse and move the text with the image</label><br>
+    <div id="menu">
+        <div>
+            <h4>Intensity</h4>
+            <label for="magnitude_range">Shaking intensity (1: subtle, 20: probably too much)</label><br>
+            <input type="range" min="1" max="20" id="magnitude_range"><span id="magnitude_slider_value"></span>
         </div>
-    </div>
-    <div>
-        <h4>Scale image down</h4>
-        <input type="checkbox" id="scaleCheckbox"><label for="scaleCheckbox">Scale the image down (good for larger images)</label><br>
-        <input type="number" id="max_image_size" min="60" value="800">
-    </div>
-    <div>
-        <button id="save-button" class="browser-style">Save preferences</button>
+        <div>
+            <h4>Text to display on the image</h4>
+            <input type="text" id="text" placeholder="No text" value="[INTENSITY INTENSIFIES]">
+        </div>
+        <div>
+            <h4>Font size</h4>
+            <label for="font_range">Size of the text (in pixels)</label><br>
+            <input type="range" min="0" max="70" id="font_range"><span id="font_slider_value"></span>
+        </div>
+        <div>
+            <h4>Text effect</h4>
+            <div id="textRadio">
+                <input type="radio" id="radioNone" name="textRadio" checked>
+                <label for="radioNone">Don't move the text</label><br>
+                <input type="radio" id="radioAlong" name="textRadio">
+                <label for="radioAlong">Shake the text along with the image</label><br>
+                <input type="radio" id="radioShake" name="textRadio">
+                <label for="radioShake">Shake the text independently from the image</label><br>
+                <input type="radio" id="radioPulse" name="textRadio">
+                <label for="radioPulse">Pulse the text on the image</label><br>
+                <input type="radio" id="radioMove" name="textRadio">
+                <label for="radioMove">Pulse and move the text with the image</label><br>
+            </div>
+        </div>
+        <div>
+            <h4>Scale image down</h4>
+            <input type="checkbox" id="scaleCheckbox"><label for="scaleCheckbox">Scale the image down (good for larger images)</label><br>
+            <input type="number" id="max_image_size" min="60" value="800">
+        </div>
+        <div>
+            <button id="save-button" class="browser-style">Save preferences</button>
+        </div>
     </div>
     <div id="center">
         <button id="intensify_button" type="button">INTENSIFY!</button>

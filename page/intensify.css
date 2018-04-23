@@ -1,0 +1,37 @@
+* {
+    margin: 0;
+}
+
+h1 {
+    padding: 50px;
+    text-align: center;
+}
+
+.msg_box {
+    text-align: center;
+    padding: 5px 0px;
+    margin: 5px 0px;
+}
+
+#msg_box_error {
+    color: #D8000C;
+    background-color: #FFBABA;
+}
+
+#msg_box_loading {
+    color: #00529B;
+    background-color: #BDE5F8;
+}
+
+#msg_box_ready {
+    color: #4F8A10;
+    background-color: #DFF2BF;
+}
+
+#msg_box_intensifying {
+    color: #00529B;
+    background-color: #BDE5F8;
+}
+
+#center {
+}
