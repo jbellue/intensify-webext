@@ -1,7 +1,7 @@
 function updateUI(restoredSettings) {
     const linkRangeToValue = (range, display) => {
-        display.innerHTML = range.value;
-        range.addEventListener('input', () => display.innerHTML = range.value);
+        display.textContent = range.value;
+        range.addEventListener('input', () => display.textContent = range.value);
     }
     const linkCheckboxToInput = (checkbox, input) => {
         input.disabled = !checkbox.checked;

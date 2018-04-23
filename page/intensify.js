@@ -163,7 +163,7 @@ show_only = (name) => {
 }
 
 show_error = (msg) => {
-    document.getElementById("msg_box_error").innerHTML = msg;
+    document.getElementById("msg_box_error").textContent = msg;
     show_only("msg_box_error");
 }
 hide_all = () => [...document.getElementsByClassName("msg_box")].forEach((e) => e.style.display = "none");
