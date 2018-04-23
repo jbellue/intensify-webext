@@ -17,7 +17,7 @@ function checkStoredSettings(storedSettings) {
     }
 }
 
-function save_image_to_local_storage(url) {
+function save_image_to_local_storage(url, callback) {
     var xhr = new XMLHttpRequest();
     xhr.open("GET", url, true);
     xhr.responseType = "blob";
@@ -27,6 +27,7 @@ function save_image_to_local_storage(url) {
             var fileReader = new FileReader();
             fileReader.onload = function (evt) {
                 localStorage.image = evt.target.result;
+                callback();
             };
             fileReader.readAsDataURL(xhr.response);
         } else {
@@ -45,18 +46,19 @@ gettingStoredSettings.then(checkStoredSettings, onError);
 
 browser.contextMenus.onClicked.addListener((info, tab) => {
     if (info.menuItemId === "intensify") {
-        save_image_to_local_storage(info.srcUrl);
-        const page_url = "/page/intensify.html"
-        let tabId = sessionStorage.getItem('tabId');
-        if (!tabId) tabId = browser.tabs.TAB_ID_NONE;
-        browser.tabs.update(parseInt(tabId, 10), {
-            active: true,
-            "url": page_url
-        }).then(undefined, () => {
-            browser.tabs.create({
+        save_image_to_local_storage(info.srcUrl, () => {
+            const page_url = "/page/intensify.html"
+            let tabId = sessionStorage.getItem('tabId');
+            if (!tabId) tabId = browser.tabs.TAB_ID_NONE;
+            browser.tabs.update(parseInt(tabId, 10), {
+                active: true,
                 "url": page_url
-            }, (tab) => {
-                sessionStorage.setItem('tabId', tab.id);
+            }).then(undefined, () => {
+                browser.tabs.create({
+                    "url": page_url
+                }, (tab) => {
+                    sessionStorage.setItem('tabId', tab.id);
+                });
             });
         });
     }
