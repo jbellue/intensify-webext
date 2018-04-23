@@ -5,7 +5,7 @@ function onError(e) {
 var defaultSettings = {
     magnitude: 7,
     fontSize: 30,
-    text: "[INTENSIFY]",
+    text: browser.i18n.getMessage("defaultText"),
     textOptions: "radioNone",
     resizeImage: true,
     maxImageSize: 800
@@ -66,6 +66,6 @@ browser.contextMenus.onClicked.addListener((info, tab) => {
 
 browser.contextMenus.create({
     id: "intensify",
-    title: "Intensify!", //browser.i18n.getMessage("menuItemIntensify"),
+    title: browser.i18n.getMessage("menuItemIntensify"),
     contexts: ["image"]
 });

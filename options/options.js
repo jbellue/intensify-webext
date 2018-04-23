@@ -18,6 +18,13 @@ function updateUI(restoredSettings) {
         // not found, default to 0 (None)
         radioButtons[0].checked = true;
     }
+    /* i18n the text, using https://github.com/erosman/HTML-Internationalization */
+    for (let node of document.querySelectorAll('[data-i18n]')) {
+        let [text, attr] = node.dataset.i18n.split('|');
+        text = browser.i18n.getMessage(text);
+        attr ? node[attr] = text : node.appendChild(document.createTextNode(text));
+    }
+    /*****************************/
     const font_size_range = document.getElementById("font_range");
     const magnitude_range = document.getElementById("magnitude_range");
     const scale_checkbox  = document.getElementById("scaleCheckbox");
