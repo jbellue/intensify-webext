@@ -2,7 +2,8 @@
 
 <html>
 <head>
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+    <title>INTENSIFY!</title>
     <script type="text/javascript" src="./intensify.js"></script>
     <script type="text/javascript" src="./jsgif/b64.js"></script>
     <script type="text/javascript" src="./jsgif/GIFEncoder.js"></script>
@@ -48,6 +49,16 @@
     </div>
     <div>
         <button id="save-button" class="browser-style">Save preferences</button>
+    </div>
+    <div id="center">
+        <button id="intensify_button" type="button">INTENSIFY!</button>
+        <canvas id="bitmap"></canvas>
+        <div id="msg_boxes">
+            <div class="msg_box" id="msg_box_error" style="display: none"></div>
+            <div class="msg_box" id="msg_box_loading" style="display: none">&#x231b; Loading...</div>
+            <div class="msg_box" id="msg_box_ready" style="display: none">&#x1F44D; Image loaded, ready for intensification!</div>
+            <div class="msg_box" id="msg_box_intensifying" style="display: none">&#x1F477; Intensifying...</div>
+        </div>
     </div>
     <script src="../options/options.js"></script>
 </body>

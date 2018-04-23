@@ -1,21 +1,21 @@
 {
-    "description": "For now, doesn't do much...",
     "manifest_version": 2,
-    "name": "intensify",
+    "name": "intensify_test",
     "version": "0.1",
-    "homepage_url": "https://github.com/jbellue/intensify-webext",
-    "icons": {
-        "48": "icons/page-48.png"
-    },
+    "description": "super",
     "background": {
         "scripts": ["background.js"]
     },
-    "permissions": ["tabs", "storage"],
+    "homepage_url": "https://github.com/jbellue/intensify-webext",
+    "permissions": [
+        "storage",
+        "contextMenus",
+        "activeTab",
+        "tabs",
+        "<all_urls>"
+    ],
     "options_ui": {
         "page": "options/options.html",
         "browser_style": true
-    },
-    "browser_action": {
-        "default_icon": "icons/page-32.png"
     }
 }
