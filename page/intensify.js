@@ -11,7 +11,15 @@ function ready() {
     }
     document.getElementById("msg_box_error").addEventListener('click', (e) => e.target.style.display = "none");
     document.getElementById("intensify_button").addEventListener('click', (e) => intensify());
+
+    window.addEventListener('storage', onStorageEvent);
     intensify();
+}
+
+function onStorageEvent(storageEvent){
+    if (storageEvent.key == "image") {
+        intensify();
+    }
 }
 
 
