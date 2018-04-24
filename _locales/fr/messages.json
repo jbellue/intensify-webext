@@ -59,13 +59,10 @@
     "intensifyButton": {
         "message": "INTENSIFIE !"
     },
-    "msgBoxLoading": {
-        "message": "Chargement..."
-    },
-    "msgBoxReady": {
-        "message": "Image chargée, prêt à intensifier !"
-    },
     "msgBoxWorking": {
-        "message": "Intensification..."
+        "message": "👷 Intensification..."
+    },
+    "msgBoxImageTooSmall": {
+        "message": "🔬 Taille de l'image trop petite."
     }
 }

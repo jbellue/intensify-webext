@@ -6,9 +6,6 @@ if (document.readyState !== 'loading') {
 }
 
 function ready() {
-    if (localStorage.image) {
-        show_only("msg_box_ready");
-    }
     document.getElementById("msg_box_error").addEventListener('click', (e) => e.target.style.display = "none");
     document.getElementById("intensify_button").addEventListener('click', (e) => intensify());
 
@@ -75,7 +72,7 @@ function create_gif(options) {
     let canvas_width = options.img.width - (magnitude * 2);
     let canvas_height = options.img.height - (magnitude * 2);
     if (canvas_width <= 1 || canvas_height <= 1) {
-        return {success: false, msg: "&#x1F52C; Image too small"};
+        return {success: false, msg: browser.i18n.getMessage("msgBoxImageTooSmall")};
     }
     options.ctx.canvas.width = canvas_width;
     options.ctx.canvas.height = canvas_height;

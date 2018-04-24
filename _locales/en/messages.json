@@ -83,16 +83,12 @@
         "message": "INTENSIFY!",
         "description": "Button to trigger the intensification."
     },
-    "msgBoxLoading": {
-        "message": "Loading...",
-        "description": "Loading message box text."
-    },
-    "msgBoxReady": {
-        "message": "Image loaded, ready for intensification!",
-        "description": "Ready message box text."
-    },
     "msgBoxWorking": {
-        "message": "Intensifying...",
+        "message": "👷 Intensifying...",
         "description": "Working message box text."
+    },
+    "msgBoxImageTooSmall": {
+        "message": "🔬 Image too small (try increasing its scale).",
+        "description": "Error Msg box: image too small."
     }
 }
