@@ -16,5 +16,4 @@ Right-click an image, and click intensify to open the intensifier in a new tab.
 
 ## Would be nice to have
 
-* a set of icons
 * an advanced options page, where the moving arrays could be defined
