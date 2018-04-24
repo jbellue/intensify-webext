@@ -1,5 +1,6 @@
-# Intensify! the browser extension!
+# Intensify! the browser extension
 Right-click an image, and click intensify to open the intensifier in a new tab.
+[![CircleCI](https://circleci.com/gh/jbellue/intensify-webext/tree/master.svg?style=shield)](https://circleci.com/gh/jbellue/intensify-webext/tree/master)
 
 ## Bugs
 * Probably loads
