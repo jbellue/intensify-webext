@@ -7,9 +7,11 @@ jobs:
     steps:
       - checkout
       - run: sudo npm install -g web-ext
+      - run: sudo apt-get update; sudo apt-get install jq
       # run tests!
       - run: web-ext lint
       - run: web-ext build
+      - run: jq 'del(.options_ui.browser_style) | del(.applications)' manifest.json
       - store_artifacts:
           path: web-ext-artifacts
           destination: build
