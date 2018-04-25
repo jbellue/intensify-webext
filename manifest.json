@@ -8,6 +8,12 @@
     "background": {
         "scripts": ["background.js"]
     },
+    "applications": {
+        "gecko": {
+            "id": "intensify-webext@github.com-jbellue",
+            "strict_min_version": "42.0"
+        }
+    },
     "homepage_url": "https://github.com/jbellue/intensify-webext",
     "permissions": [
         "storage",

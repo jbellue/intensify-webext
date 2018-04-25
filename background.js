@@ -2,20 +2,14 @@ function onError(e) {
     console.error(e);
 }
 
-var defaultSettings = {
+const options = {
     magnitude: 7,
     fontSize: 30,
-    text: browser.i18n.getMessage("defaultText"),
+    text: chrome.i18n.getMessage("defaultText"),
     textOptions: "radioNone",
     resizeImage: true,
     maxImageSize: 800
 };
-
-function checkStoredSettings(storedSettings) {
-    if (!storedSettings.since || !storedSettings.dataTypes) {
-        browser.storage.local.set(defaultSettings);
-    }
-}
 
 function save_image_to_local_storage(url, callback) {
     var xhr = new XMLHttpRequest();
@@ -40,32 +34,40 @@ function save_image_to_local_storage(url, callback) {
     xhr.send();
 }
 
-
-const gettingStoredSettings = browser.storage.local.get();
-gettingStoredSettings.then(checkStoredSettings, onError);
-
-browser.contextMenus.onClicked.addListener((info, tab) => {
+chrome.contextMenus.onClicked.addListener((info, tab) => {
     if (info.menuItemId === "intensify") {
         save_image_to_local_storage(info.srcUrl, () => {
-            const page_url = "/page/intensify.html"
             let tabId = sessionStorage.getItem('tabId');
-            if (!tabId) tabId = browser.tabs.TAB_ID_NONE;
-            browser.tabs.update(parseInt(tabId, 10), {
-                active: true,
-                "url": page_url
-            }).then(undefined, () => {
-                browser.tabs.create({
-                    "url": page_url
-                }, (tab) => {
-                    sessionStorage.setItem('tabId', tab.id);
-                });
-            });
+            tabId = tabId ? parseInt(tabId, 10) : 0;//chrome.tabs.TAB_ID_NONE;
+            chrome.tabs.get(tabId, createTab);
         });
     }
 });
 
-browser.contextMenus.create({
+function createTab(tab) {
+    const page_url = "/page/intensify.html"
+    if (chrome.runtime.lastError) {
+        chrome.tabs.create({
+            "url": page_url
+        }, (tab) => {
+            sessionStorage.setItem('tabId', tab.id);
+        });
+    } else {
+        chrome.tabs.update(tab.id, {
+            active: true,
+            "url": page_url
+        })
+    }
+}
+
+chrome.contextMenus.create({
     id: "intensify",
-    title: browser.i18n.getMessage("menuItemIntensify"),
+    title: chrome.i18n.getMessage("menuItemIntensify"),
     contexts: ["image"]
+});
+
+chrome.storage.sync.get("options", result => {
+    if (Object.keys(result).length === 0) {
+        chrome.storage.sync.set({options: options});
+    }
 });

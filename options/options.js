@@ -21,7 +21,7 @@ function updateUI(restoredSettings) {
     /* i18n the text, using https://github.com/erosman/HTML-Internationalization */
     for (let node of document.querySelectorAll('[data-i18n]')) {
         let [text, attr] = node.dataset.i18n.split('|');
-        text = browser.i18n.getMessage(text);
+        text = chrome.i18n.getMessage(text);
         attr ? node[attr] = text : node.appendChild(document.createTextNode(text));
     }
     /*****************************/
@@ -52,22 +52,15 @@ function storeSettings() {
     const getMaxImageSize = () => document.getElementById("max_image_size").value;
     const getTextOptions = () =>  document.querySelector('input[name="textRadio"]:checked').id;
     const getResizeImage = () =>  document.getElementById("scaleCheckbox").checked;
-    const magnitude    = getMagnitude();
-    const fontSize     = getFontSize();
-    const text         = getText();
-    const maxImageSize = getMaxImageSize();
-    const textOptions  = getTextOptions();
-    const resizeImage  = getResizeImage();
-    browser.storage.local.set({
-        magnitude,
-        fontSize,
-        text,
-        textOptions,
-        resizeImage,
-        maxImageSize
-    });
+    const options = new Object();
+    options.magnitude    = getMagnitude();
+    options.fontSize     = getFontSize();
+    options.text         = getText();
+    options.maxImageSize = getMaxImageSize();
+    options.textOptions  = getTextOptions();
+    options.resizeImage  = getResizeImage();
+    chrome.storage.sync.set({options: options});
 }
 
 document.getElementById("save-button").addEventListener("click", storeSettings);
-const gettingStoredSettings = browser.storage.local.get();
-gettingStoredSettings.then(updateUI, onError);
+chrome.storage.sync.get("options", result => { updateUI(result.options)} );

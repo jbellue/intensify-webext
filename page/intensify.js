@@ -72,7 +72,7 @@ function create_gif(options) {
     let canvas_width = options.img.width - (magnitude * 2);
     let canvas_height = options.img.height - (magnitude * 2);
     if (canvas_width <= 1 || canvas_height <= 1) {
-        return {success: false, msg: browser.i18n.getMessage("msgBoxImageTooSmall")};
+        return {success: false, msg: chrome.i18n.getMessage("msgBoxImageTooSmall")};
     }
     options.ctx.canvas.width = canvas_width;
     options.ctx.canvas.height = canvas_height;
