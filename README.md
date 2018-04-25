@@ -7,6 +7,8 @@ As far as I can tell, this extension should work both in Mozilla Firefox and Goo
 
 ## Bugs
 
+* Sometimes when changing the config from the options, the text doesn't appear in the next intensified image
+* the chrome zip file doesn't unpack for an unknown reason
 * Probably loads
 
 ## Needs done
@@ -19,3 +21,7 @@ As far as I can tell, this extension should work both in Mozilla Firefox and Goo
 ## Would be nice to have
 
 * an advanced options page, where the moving arrays could be defined
+
+## Quite probably won't happen
+
+* repack gifs. Too much work.
