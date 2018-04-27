@@ -5,11 +5,20 @@ if (document.readyState !== 'loading') {
     document.addEventListener('DOMContentLoaded', ready)
 }
 
+var optionsPage;
 function ready() {
+    optionsPageObject = document.getElementById("optionsPage");
     document.getElementById("msg_box_error").addEventListener('click', (e) => e.target.style.display = "none");
     document.getElementById("intensify_button").addEventListener('click', (e) => intensify());
-
-    intensify();
+    for (let node of document.querySelectorAll('[data-i18n]')) {
+        let [text, attr] = node.dataset.i18n.split('|');
+        text = chrome.i18n.getMessage(text);
+        attr ? node[attr] = text : node.appendChild(document.createTextNode(text));
+    }
+    optionsPageObject.onload = () => {
+        optionsPage = optionsPageObject.contentDocument;
+        intensify();
+    }
 }
 
 function intensify() {
@@ -32,8 +41,8 @@ function intensify() {
     target.onload = () => {
         var img_width  = target.width;
         var img_height = target.height;
-        if (document.getElementById("scaleCheckbox").checked) {
-            var max_size   = document.getElementById("max_image_size").value;
+        if (optionsPage.getElementById("scaleCheckbox").checked) {
+            var max_size   = optionsPage.getElementById("max_image_size").value;
             if (max_size) {
                 if (img_width > max_size) {
                     ratio = max_size/img_width;
@@ -53,10 +62,10 @@ function intensify() {
         var options = {
             img: imgCanvas,
             ctx: canvas.getContext("2d"),
-            magnitude: document.getElementById("magnitude_range").valueAsNumber,
-            font_size: document.getElementById("font_range").valueAsNumber,
-            text: document.getElementById("text").value,
-            text_effect: document.querySelector('input[name="textRadio"]:checked').id,
+            magnitude: optionsPage.getElementById("magnitude_range").valueAsNumber,
+            font_size: optionsPage.getElementById("font_range").valueAsNumber,
+            text: optionsPage.getElementById("text").value,
+            text_effect: optionsPage.querySelector('input[name="textRadio"]:checked').id,
             img_output: intense_gif
         }
         let ret = create_gif(options);
