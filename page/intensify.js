@@ -80,18 +80,20 @@ function create_gif(options) {
     encoder.setRepeat(0);
     encoder.setDelay(20);
     encoder.start();
-    
-    var font_size = options.font_size || 30;
-    options.ctx.font = font_size + "px Impact";
-    options.ctx.fillStyle = "White";
-    options.ctx.lineWidth = 1;
-    options.ctx.strokeStyle = "Black";
-    options.ctx.textAlign = "center";
+
+    var font_size = options.font_size;
+    if (options.font_size) {
+        options.ctx.font = font_size + "px Impact";
+        options.ctx.fillStyle = "White";
+        options.ctx.lineWidth = 1;
+        options.ctx.strokeStyle = "Black";
+        options.ctx.textAlign = "center";
+    }
     var gif_data = {
         source_file: options.img,
         magnitude: magnitude,
-        text: options.text,
-        intensify_text: options.text_effect || "radioNone",
+        text: options.font_size ? options.text : "",
+        intensify_text: options.text_effect,
         image_x: [0, 2, 1, 0, 2],
         image_y: [2, 2, 0, 1, 1],
         text_x:  [1, 0, 2, 0, 1],
@@ -123,30 +125,32 @@ function draw_gif_frame(ctx, gif_data, frame) {
     var image_y = magnitude * gif_data.image_y[frame];
     ctx.drawImage(gif_data.source_file, image_x, image_y);
 
-    var text_x = ctx.canvas.clientWidth / 2;
-    var text_y = ctx.canvas.clientHeight * 0.98;
-    switch (gif_data.intensify_text) {
-        case "radioAlong":
-        text_x += image_x;
-        text_y += image_y;
-        break;
-        case "radioShake":
-        text_x += magnitude * gif_data.text_x[frame];
-        text_y += magnitude * gif_data.text_y[frame];
-        break;
-        case "radioMove":
-        text_x += image_x;
-        text_y += image_y;
-        // intentional fallthrough
-        case "radioPulse":
-        ctx.font = ctx.font.replace(/\d+px/, parseInt(ctx.font.match(/\d+/)) + 4 + "px");
-        break;
-        default:
+    if (gif_data.text != "") {
+        var text_x = ctx.canvas.clientWidth / 2;
+        var text_y = ctx.canvas.clientHeight * 0.98;
+        switch (gif_data.intensify_text) {
+            case "radioAlong":
+            text_x += image_x;
+            text_y += image_y;
+            break;
+            case "radioShake":
+            text_x += magnitude * gif_data.text_x[frame];
+            text_y += magnitude * gif_data.text_y[frame];
+            break;
+            case "radioMove":
+            text_x += image_x;
+            text_y += image_y;
+            // intentional fallthrough
+            case "radioPulse":
+            ctx.font = ctx.font.replace(/\d+px/, parseInt(ctx.font.match(/\d+/)) + 4 + "px");
+            break;
+            default:
+        }
+        ctx.fillText(gif_data.text, text_x, text_y);
+        ctx.strokeText(gif_data.text, text_x, text_y);
+        ctx.fill();
+        ctx.stroke();
     }
-    ctx.fillText(gif_data.text, text_x, text_y);
-    ctx.strokeText(gif_data.text, text_x, text_y);
-    ctx.fill();
-    ctx.stroke();
 }
 
 show_only = (name) => {
