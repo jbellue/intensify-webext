@@ -14,7 +14,6 @@ As far as I can tell, this extension should work both in Mozilla Firefox and Goo
 ## Needs done
 
 * A prettier page
-* Less code duplication (I'm looking at you, options page). Maybe inject everything with JS?
 * Unittests (look into [webextensions-jsdom](https://www.npmjs.com/package/webextensions-jsdom))
 * check minimum gecko version
 
