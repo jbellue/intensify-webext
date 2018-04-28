@@ -1,4 +1,5 @@
 function updateUI(restoredSettings) {
+    console.log(document);
     const linkRangeToValue = (range, display) => {
         display.textContent = range.value;
         range.addEventListener('input', () => display.textContent = range.value);
@@ -64,3 +65,9 @@ function storeSettings() {
 
 document.getElementById("save-button").addEventListener("click", storeSettings);
 chrome.storage.sync.get("options", result => { updateUI(result.options)} );
+
+var cssLink = document.createElement("link");
+cssLink.href = window.frameElement?"./options_page.css":"./options_ui.css";
+cssLink.rel = "stylesheet";
+cssLink.type = "text/css";
+document.body.appendChild(cssLink);
