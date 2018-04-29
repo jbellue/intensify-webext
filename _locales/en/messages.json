@@ -90,5 +90,13 @@
     "msgBoxImageTooSmall": {
         "message": "🔬 Image too small (try increasing its scale).",
         "description": "Error Msg box: image too small."
+    },
+    "outputFileName": {
+        "message": "intense",
+        "description": "The output filename (without the '.gif')"
+    },
+    "downloadHelper": {
+        "message": "(click on the image to download it)",
+        "description": "The helper text below the intensified gif"
     }
 }

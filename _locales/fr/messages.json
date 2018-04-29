@@ -64,5 +64,11 @@
     },
     "msgBoxImageTooSmall": {
         "message": "🔬 Taille de l'image trop petite."
+    },
+    "outputFileName": {
+        "message": "intense"
+    },
+    "downloadHelper": {
+        "message": "(cliquer sur l'image pour la télécharger)"
     }
 }

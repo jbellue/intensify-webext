@@ -47,6 +47,10 @@ h1 {
     text-decoration: none;
 }
 
+#downloadHelper {
+    color: #aaaaaa;
+}
+
 #intensify_button:hover {
     background: #3cb0fd;
     text-decoration: none;

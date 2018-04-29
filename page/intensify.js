@@ -28,11 +28,19 @@ function intensify() {
         canvas.id = "bitmap";
         document.getElementById("center").appendChild(canvas);
     }
-    var intense_gif = document.getElementById("intensity_image");
+
+
+    let intense_link = document.getElementById("intensity_link");
+    if (intense_link == undefined) {
+        intense_link = document.createElement('a');
+        intense_link.id = "intensity_link";
+        document.getElementById("intensifyImage").appendChild(intense_link);
+    }
+    let intense_gif = document.getElementById("intensity_image");
     if (intense_gif == undefined) {
         intense_gif = new Image();
         intense_gif.id = "intensity_image";
-        document.getElementById("center").appendChild(intense_gif);
+        intense_link.appendChild(intense_gif);
     }
     var imgCanvas = document.createElement("canvas");
     var imgCtx = imgCanvas.getContext("2d");
@@ -65,7 +73,8 @@ function intensify() {
             font_size: optionsPage.getElementById("font_range").valueAsNumber,
             text: optionsPage.getElementById("text").value,
             text_effect: optionsPage.querySelector('input[name="textRadio"]:checked').id,
-            img_output: intense_gif
+            img_output: intense_gif,
+            link_to_image: intense_link
         }
         let ret = create_gif(options);
         if (!ret.success) {
@@ -118,6 +127,8 @@ function create_gif(options) {
     var data_url = "data:image/gif;base64," + encode64(encoder.stream().getData());
 
     options.img_output.src = data_url;
+    options.link_to_image.href = data_url;
+    options.link_to_image.download = chrome.i18n.getMessage("outputFileName") + ".gif";
 
     hide_all();
     options.img_output.width = options.ctx.canvas.width;
