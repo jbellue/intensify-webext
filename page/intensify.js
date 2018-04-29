@@ -5,9 +5,8 @@ if (document.readyState !== 'loading') {
     document.addEventListener('DOMContentLoaded', ready)
 }
 
-var optionsPage;
 function ready() {
-    optionsPageObject = document.getElementById("optionsPage");
+    let optionsPageObject = document.getElementById("optionsPage");
     document.getElementById("msg_box_error").addEventListener('click', (e) => e.target.style.display = "none");
     document.getElementById("intensify_button").addEventListener('click', (e) => intensify());
     for (let node of document.querySelectorAll('[data-i18n]')) {
@@ -42,7 +41,7 @@ function intensify() {
         var img_width  = target.width;
         var img_height = target.height;
         if (optionsPage.getElementById("scaleCheckbox").checked) {
-            var max_size   = optionsPage.getElementById("max_image_size").value;
+            var max_size = optionsPage.getElementById("max_image_size").value;
             if (max_size) {
                 if (img_width > max_size) {
                     ratio = max_size/img_width;
@@ -162,7 +161,7 @@ function draw_gif_frame(ctx, gif_data, frame) {
     }
 }
 
-show_only = (name) => {
+const show_only = (name) => {
     [...document.getElementsByClassName("msg_box")].forEach((div) => {
         if (div.id == name) {
             div.style.display = "block";
@@ -172,8 +171,9 @@ show_only = (name) => {
     });
 }
 
-show_error = (msg) => {
+const show_error = (msg) => {
     document.getElementById("msg_box_error").textContent = msg;
     show_only("msg_box_error");
 }
-hide_all = () => [...document.getElementsByClassName("msg_box")].forEach((e) => e.style.display = "none");
+
+const hide_all = () => [...document.getElementsByClassName("msg_box")].forEach((e) => e.style.display = "none");
