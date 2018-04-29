@@ -59,12 +59,6 @@
     "intensifyButton": {
         "message": "INTENSIFIE !"
     },
-    "msgBoxWorking": {
-        "message": "👷 Intensification..."
-    },
-    "msgBoxImageTooSmall": {
-        "message": "🔬 Taille de l'image trop petite."
-    },
     "outputFileName": {
         "message": "intense"
     },

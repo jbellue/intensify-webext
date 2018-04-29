@@ -7,7 +7,6 @@ if (document.readyState !== 'loading') {
 
 function ready() {
     let optionsPageObject = document.getElementById("optionsPage");
-    document.getElementById("msg_box_error").addEventListener('click', (e) => e.target.style.display = "none");
     document.getElementById("intensify_button").addEventListener('click', (e) => intensify());
     for (let node of document.querySelectorAll('[data-i18n]')) {
         let [text, attr] = node.dataset.i18n.split('|');
@@ -21,7 +20,8 @@ function ready() {
 }
 
 function intensify() {
-    show_only("msg_box_intensifying");
+    document.getElementById("intensify_button").classList.add("buttonRunning");
+
     var canvas = document.getElementById("bitmap");
     if (canvas === null) {
         canvas = document.createElement("canvas");
@@ -52,12 +52,12 @@ function intensify() {
             var max_size = optionsPage.getElementById("max_image_size").value;
             if (max_size) {
                 if (img_width > max_size) {
-                    ratio = max_size/img_width;
+                    let ratio = max_size/img_width;
                     img_width *= ratio;
                     img_height *= ratio;
                 }
                 if (img_height > max_size) {
-                    ratio = max_size/img_height;
+                    let ratio = max_size/img_height;
                     img_width *= ratio;
                     img_height *= ratio;
                 }
@@ -76,10 +76,12 @@ function intensify() {
             img_output: intense_gif,
             link_to_image: intense_link
         }
-        let ret = create_gif(options);
-        if (!ret.success) {
-            show_error(ret.msg);
-        }
+        // ugly ugly hack to ensure DOM has had time to render class change...
+        setTimeout(()=> {
+            if (!create_gif(options)) {
+                showError();
+            }
+        }, 100);
     };
     target.src = localStorage.image;
 }
@@ -89,7 +91,7 @@ function create_gif(options) {
     let canvas_width = options.img.width - (magnitude * 2);
     let canvas_height = options.img.height - (magnitude * 2);
     if (canvas_width <= 1 || canvas_height <= 1) {
-        return {success: false, msg: chrome.i18n.getMessage("msgBoxImageTooSmall")};
+        return false;
     }
     options.ctx.canvas.width = canvas_width;
     options.ctx.canvas.height = canvas_height;
@@ -130,12 +132,12 @@ function create_gif(options) {
     options.link_to_image.href = data_url;
     options.link_to_image.download = chrome.i18n.getMessage("outputFileName") + ".gif";
 
-    hide_all();
+    resetButton();
     options.img_output.width = options.ctx.canvas.width;
     options.img_output.height = options.ctx.canvas.height;
     options.ctx.canvas.width = 0;
     options.ctx.canvas.height = 0;
-    return {success: true};
+    return true;
 }
 
 function draw_gif_frame(ctx, gif_data, frame) {
@@ -172,19 +174,14 @@ function draw_gif_frame(ctx, gif_data, frame) {
     }
 }
 
-const show_only = (name) => {
-    [...document.getElementsByClassName("msg_box")].forEach((div) => {
-        if (div.id == name) {
-            div.style.display = "block";
-        } else {
-            div.style.display = "none";
-        }
-    });
+const showError = (msg) => {
+    let btn = document.getElementById("intensify_button");
+    btn.classList.remove("buttonRunning");
+    btn.classList.add("buttonFailed");
 }
 
-const show_error = (msg) => {
-    document.getElementById("msg_box_error").textContent = msg;
-    show_only("msg_box_error");
+const resetButton = () => {
+    let btn = document.getElementById("intensify_button");
+    btn.classList.remove("buttonRunning");
+    btn.classList.remove("buttonFailed");
 }
-
-const hide_all = () => [...document.getElementsByClassName("msg_box")].forEach((e) => e.style.display = "none");

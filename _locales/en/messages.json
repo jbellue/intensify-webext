@@ -83,14 +83,6 @@
         "message": "INTENSIFY!",
         "description": "Button to trigger the intensification."
     },
-    "msgBoxWorking": {
-        "message": "👷 Intensifying...",
-        "description": "Working message box text."
-    },
-    "msgBoxImageTooSmall": {
-        "message": "🔬 Image too small (try increasing its scale).",
-        "description": "Error Msg box: image too small."
-    },
     "outputFileName": {
         "message": "intense",
         "description": "The output filename (without the '.gif')"
