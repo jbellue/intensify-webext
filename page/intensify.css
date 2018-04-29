@@ -45,6 +45,7 @@ h1 {
     padding: 20px;
     background: #3498db;
     text-decoration: none;
+    letter-spacing: 0.2rem;
 }
 
 #downloadHelper {
