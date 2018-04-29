@@ -1,5 +1,4 @@
 function updateUI(restoredSettings) {
-    console.log(document);
     const linkRangeToValue = (range, display) => {
         display.textContent = range.value;
         range.addEventListener('input', () => display.textContent = range.value);
